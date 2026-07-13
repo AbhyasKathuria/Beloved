@@ -121,6 +121,10 @@ export async function saveBouquet(
     if (error) {
       throw error;
     }
+    
+    // Save this ID to the user's local creation index for dashboard tracking
+    saveCreatedIdToLocalStorage(newId);
+
     return newId;
   } else {
     // Local storage fallback

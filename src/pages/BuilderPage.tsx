@@ -41,6 +41,7 @@ export const BuilderPage: React.FC<BuilderPageProps> = ({ onNavigateToDashboard 
   const [copySuccess, setCopySuccess] = useState(false);
   const [audioBase64, setAudioBase64] = useState<string | null>(null);
 
+  const [showAboutModal, setShowAboutModal] = useState(false);
   const stageRef = useRef<any>(null);
 
   // Add flower to the center of virtual 800x800 coordinate space
@@ -229,13 +230,22 @@ export const BuilderPage: React.FC<BuilderPageProps> = ({ onNavigateToDashboard 
             Beloved
           </h1>
         </div>
-        <button 
-          onClick={onNavigateToDashboard}
-          className="btn btn-secondary"
-          style={{ fontSize: '0.85rem', padding: '0.5rem 1rem' }}
-        >
-          <Layers size={14} /> My Creations
-        </button>
+        <div style={{ display: 'flex', gap: '0.75rem' }}>
+          <button 
+            onClick={() => setShowAboutModal(true)}
+            className="btn btn-secondary"
+            style={{ fontSize: '0.85rem', padding: '0.5rem 1rem', display: 'flex', alignItems: 'center', gap: '0.25rem' }}
+          >
+            ❤️ Our Story
+          </button>
+          <button 
+            onClick={onNavigateToDashboard}
+            className="btn btn-secondary"
+            style={{ fontSize: '0.85rem', padding: '0.5rem 1rem', display: 'flex', alignItems: 'center', gap: '0.25rem' }}
+          >
+            <Layers size={14} /> My Creations
+          </button>
+        </div>
       </header>
 
       {/* Main Builder layout */}
@@ -377,6 +387,116 @@ export const BuilderPage: React.FC<BuilderPageProps> = ({ onNavigateToDashboard 
               style={{ width: '100%' }}
             >
               Build Another Bouquet 🌸
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* About Us / Our Story Modal */}
+      {showAboutModal && (
+        <div 
+          className="modal-overlay"
+          onClick={() => setShowAboutModal(false)}
+          style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            background: 'rgba(15, 23, 42, 0.45)', // Sleek slate glass mask
+            backdropFilter: 'blur(8px)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            zIndex: 1000,
+            padding: '1.5rem',
+            animation: 'fadeIn 0.25s ease'
+          }}
+        >
+          <div 
+            className="glass-panel"
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              maxWidth: '500px',
+              width: '100%',
+              padding: '2.5rem 2rem',
+              borderRadius: 'var(--radius-lg)',
+              textAlign: 'center',
+              boxShadow: 'var(--shadow-xl)',
+              border: '1px solid rgba(255, 255, 255, 0.5)',
+              position: 'relative',
+              animation: 'scaleUp 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)'
+            }}
+          >
+            <button
+              onClick={() => setShowAboutModal(false)}
+              style={{
+                position: 'absolute',
+                top: '1rem',
+                right: '1rem',
+                background: 'none',
+                border: 'none',
+                fontSize: '1.5rem',
+                cursor: 'pointer',
+                opacity: 0.6,
+                color: 'var(--color-text-title)'
+              }}
+            >
+              &times;
+            </button>
+            
+            <div style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>🌹❤️🌹</div>
+            
+            <h2 className="font-serif" style={{ fontSize: '1.8rem', color: '#be123c', marginBottom: '1rem' }}>
+              The Story of Beloved
+            </h2>
+            
+            <div 
+              style={{ 
+                fontSize: '0.95rem', 
+                lineHeight: 1.6, 
+                color: 'var(--color-text-title)', 
+                textAlign: 'left', 
+                marginBottom: '2rem' 
+              }}
+            >
+              <p style={{ marginBottom: '1rem' }}>
+                Beloved was born out of the distance between two hearts. Inspired by a real-life long-distance relationship, the idea sparkled from a simple wish: a girl who adores flowers, and a boy who wanted to make her smile across the miles.
+              </p>
+              <p style={{ marginBottom: '1rem' }}>
+                Real flowers wither, and emojis feel too small for big emotions. So, he built a canvas where they could arrange digital blossoms—ones that never fade, never wilt, and carry love across any distance.
+              </p>
+              <p style={{ fontStyle: 'italic', color: '#be123c', textAlign: 'center', margin: '1.5rem 0', fontWeight: 500 }}>
+                "For the flowers that will never fade, and the love that will never wilt."
+              </p>
+              
+              <div 
+                style={{ 
+                  borderTop: '1px dashed var(--color-border)', 
+                  paddingTop: '1.25rem', 
+                  marginTop: '1.5rem',
+                  display: 'flex',
+                  justifyContent: 'space-around',
+                  textAlign: 'center'
+                }}
+              >
+                <div>
+                  <h4 style={{ margin: 0, fontSize: '0.95rem', fontWeight: 600 }}>Abhyas Kathuria</h4>
+                  <span style={{ fontSize: '0.75rem', opacity: 0.6 }}>Founder</span>
+                </div>
+                <div>
+                  <h4 style={{ margin: 0, fontSize: '0.95rem', fontWeight: 600 }}>Muskan Agarwal</h4>
+                  <span style={{ fontSize: '0.75rem', opacity: 0.6 }}>Co-Founder</span>
+                </div>
+              </div>
+            </div>
+            
+            <button 
+              onClick={() => setShowAboutModal(false)}
+              className="btn btn-primary"
+              style={{ width: '100%' }}
+            >
+              Close Story
             </button>
           </div>
         </div>

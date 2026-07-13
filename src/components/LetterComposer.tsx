@@ -130,7 +130,7 @@ export const LetterComposer: React.FC<LetterComposerProps> = ({
           <input
             type="text"
             className="form-input"
-            placeholder="e.g. Abhyas"
+            placeholder="Your Name"
             value={data.sender_name}
             onChange={(e) => handleFieldChange('sender_name', e.target.value)}
           />
