@@ -136,54 +136,56 @@ export const Canvas: React.FC<CanvasProps> = ({
       >
         <Layer>
           {/* Decorative Bouquet Wrapper Paper Guide (Narrow at bottom, wide at top) */}
-          <Group name="wrapper-guide" listening={false}>
-            {/* Outer wrapping paper sheet */}
-            <Line
-              points={[
-                180, 340, // Top Left
-                400, 780, // Bottom Tip
-                620, 340  // Top Right
-              ]}
-              closed={true}
-              fillLinearGradientStartPoint={{ x: 400, y: 340 }}
-              fillLinearGradientEndPoint={{ x: 400, y: 780 }}
-              fillLinearGradientColorStops={[
-                0, 'rgba(255, 240, 240, 0.75)', // Soft warm peachy pink
-                1, 'rgba(254, 205, 211, 0.85)'  // Rose darker
-              ]}
-              stroke="rgba(225, 29, 72, 0.18)"
-              strokeWidth={2}
-              dash={[8, 5]}
-            />
-            {/* Inner fold accents */}
-            <Line
-              points={[
-                280, 460,
-                400, 780,
-                520, 460
-              ]}
-              closed={true}
-              fill="rgba(255, 255, 255, 0.35)"
-              stroke="rgba(225, 29, 72, 0.12)"
-              strokeWidth={1.5}
-            />
-            {/* Stems inside wrapping paper */}
-            <Line
-              points={[385, 460, 385, 680]}
-              stroke="rgba(101, 163, 13, 0.45)" // Sage green
-              strokeWidth={4.5}
-            />
-            <Line
-              points={[400, 460, 400, 700]}
-              stroke="rgba(101, 163, 13, 0.5)" // Central stem
-              strokeWidth={5}
-            />
-            <Line
-              points={[415, 460, 415, 680]}
-              stroke="rgba(101, 163, 13, 0.45)"
-              strokeWidth={4.5}
-            />
-          </Group>
+          {!readOnly && (
+            <Group name="wrapper-guide" listening={false}>
+              {/* Outer wrapping paper sheet */}
+              <Line
+                points={[
+                  180, 340, // Top Left
+                  400, 780, // Bottom Tip
+                  620, 340  // Top Right
+                ]}
+                closed={true}
+                fillLinearGradientStartPoint={{ x: 400, y: 340 }}
+                fillLinearGradientEndPoint={{ x: 400, y: 780 }}
+                fillLinearGradientColorStops={[
+                  0, 'rgba(255, 240, 240, 0.75)', // Soft warm peachy pink
+                  1, 'rgba(254, 205, 211, 0.85)'  // Rose darker
+                ]}
+                stroke="rgba(225, 29, 72, 0.18)"
+                strokeWidth={2}
+                dash={[8, 5]}
+              />
+              {/* Inner fold accents */}
+              <Line
+                points={[
+                  280, 460,
+                  400, 780,
+                  520, 460
+                ]}
+                closed={true}
+                fill="rgba(255, 255, 255, 0.35)"
+                stroke="rgba(225, 29, 72, 0.12)"
+                strokeWidth={1.5}
+              />
+              {/* Stems inside wrapping paper */}
+              <Line
+                points={[385, 460, 385, 680]}
+                stroke="rgba(101, 163, 13, 0.45)" // Sage green
+                strokeWidth={4.5}
+              />
+              <Line
+                points={[400, 460, 400, 700]}
+                stroke="rgba(101, 163, 13, 0.5)" // Central stem
+                strokeWidth={5}
+              />
+              <Line
+                points={[415, 460, 415, 680]}
+                stroke="rgba(101, 163, 13, 0.45)"
+                strokeWidth={4.5}
+              />
+            </Group>
+          )}
 
           {(flowers || []).filter((f) => f && f.id && f.src).map((flower) => (
             <FlowerImage
