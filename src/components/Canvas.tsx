@@ -123,6 +123,7 @@ export const Canvas: React.FC<CanvasProps> = ({
         overflow: 'hidden',
         position: 'relative',
         cursor: readOnly ? 'default' : 'pointer',
+        touchAction: readOnly ? 'auto' : 'none', // Prevent page scroll when dragging flowers on touch screens
       }}
     >
       <Stage
@@ -218,6 +219,14 @@ export const Canvas: React.FC<CanvasProps> = ({
           {!readOnly && selectedId && (
             <Transformer
               ref={trRef}
+              anchorSize={16} // Chunky touch-friendly handles
+              anchorCornerRadius={8} // Circular anchors
+              anchorStroke="#db2777" // Pink theme stroke
+              anchorFill="#ffffff" // White center fill
+              borderStroke="#db2777"
+              borderStrokeWidth={1.5}
+              rotateAnchorOffset={35} // Distance between rotate handle and scale handles to prevent mis-taps
+              keepRatio={true} // Proportionate scaling by default
               boundBoxFunc={(oldBox, newBox) => {
                 // limit scale
                 if (Math.abs(newBox.width) < 10 || Math.abs(newBox.height) < 10) {
