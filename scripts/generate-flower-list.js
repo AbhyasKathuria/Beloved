@@ -30,6 +30,9 @@ function copyFolderSync(from, to) {
 }
 
 console.log('Syncing flower assets...');
+if (fs.existsSync(destFlowersDir)) {
+  fs.rmSync(destFlowersDir, { recursive: true, force: true });
+}
 if (fs.existsSync(srcFlowersDir)) {
   copyFolderSync(srcFlowersDir, destFlowersDir);
 } else {
